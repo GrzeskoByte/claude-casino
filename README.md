@@ -87,6 +87,8 @@ git clone https://github.com/GrzeskoByte/claude-casino.git
 claude --plugin-dir ./claude-casino
 ```
 
+That's it: there is nothing to configure. From then on every prompt you send pulls the lever and opens the slot machine sidebar. Type `/slot` to switch the casino off (and again to switch it back on).
+
 To load it in every session, add the folder to `CLAUDE_CODE_PLUGIN_DIRS` in the `env` block of `~/.claude/settings.json`:
 
 ```json
@@ -99,6 +101,7 @@ To load it in every session, add the folder to `CLAUDE_CODE_PLUGIN_DIRS` in the 
 
 ### Requirements
 
+- **A recent Claude Code.** The mod is built on Claude Code's function-hook plugin API, which is early access; it was built and tested on Claude Code 2.1.288. On older versions the mod will not load. Run `claude plugin validate ./claude-casino` to check it against yours.
 - **A terminal with 24-bit colour.** The machine is drawn with true-colour half-block pixels. Most modern terminals support this (Ghostty, kitty, Alacritty, WezTerm, iTerm2, Windows Terminal).
 - **About 78 columns of sidebar width.** The casino scene is 76 × 56 cells. The sidebar asks for 78 columns; a narrower one crops the picture, and a shorter one scrolls. In the fullscreen layout the sidebar docks beside the conversation, otherwise it opens above the prompt.
 - **Other surfaces.** The desktop app, VS Code and mobile cannot draw pixel grids, so they get a simple text version of the reels, display and payout.
