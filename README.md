@@ -6,15 +6,22 @@
 
 It is purely an entertainment layer: the reels never change what Claude does.
 
-| Waiting | Spinning | Jackpot |
+<p align="center">
+  <img src="docs/demo.gif" alt="Claude Gambler: the lever is pulled, the reels spin, land on 7 7 7 and the JACKPOT sign lights up" width="380">
+</p>
+
+## Screenshots
+
+| 🔥 MEGA JACKPOT | 💥 JACKPOT | 💀 BUST |
 | :---: | :---: | :---: |
-| ![Idle machine](docs/idle.png) | ![Reels spinning](docs/spin.png) | ![Jackpot](docs/won.png) |
+| ![Three sevens on the payline, MEGA JACKPOT on the crown, a rainbow JACKPOT burst on the wall and the WIN meter at 128,420](docs/mega-jackpot.png) | ![Three bells on the payline, the JACKPOT burst on the wall and the payout on the WIN meter](docs/jackpot.png) | ![Mismatched reels, a red BUST! sign and HOUSE WINS on the crown](docs/bust.png) |
+| Three sevens: the rarest win. | Any three of a kind. | Claude was interrupted or hit an error. |
 
-| Win sign | Bust sign |
+| Waiting for a prompt | Reels spinning while Claude works |
 | :---: | :---: |
-| ![JACKPOT sign](docs/jackpot-sign.png) | ![BUST sign](docs/bust-sign.png) |
+| ![The machine idle in the casino under a neon CASINO sign](docs/idle.png) | ![Reels blurred mid-spin, the lever pulled down, the LED display scrolling GOOD LUCK](docs/spinning.png) |
 
-*(Previews are scaled up; in the terminal each pixel is half a character cell. The win and bust signs hang on the casino wall in place of the neon CASINO sign.)*
+*(Screenshots and the animation are rendered from the mod's own drawing code and scaled up; in the terminal each pixel is half a character cell.)*
 
 ---
 
@@ -134,19 +141,20 @@ claude-casino/
 ├── .claude-plugin/plugin.json   manifest
 ├── hooks/
 │   ├── hooks.json               points Claude Code at register.tsx
-│   ├── register.tsx             hooks, game flow, reel physics, payout, pane layout
+│   ├── register.tsx             hooks: game flow, the animation clock, payout, pane layout
+│   ├── game.ts                  the game itself: outcomes, reel physics, what each frame shows
 │   ├── machine.ts               the casino scene, the slot machine and the JACKPOT / BUST sign
 │   └── pixels.ts                framebuffer, Raster packing, 3x5 font, symbol sprites
 ├── types/index.d.ts             the state contract (PluginState)
 ├── tests/slot.test.tsx          win, bust and on/off tests
-└── docs/                        preview images for this README
+└── docs/                        screenshots and the demo GIF for this README
 ```
 
 ---
 
 ## Customising
 
-Most knobs are constants at the top of `hooks/register.tsx`:
+Most knobs are constants at the top of `hooks/game.ts`:
 
 | Constant | Default | Effect |
 | --- | --- | --- |
@@ -160,7 +168,7 @@ Most knobs are constants at the top of `hooks/register.tsx`:
 | `SPEEDRUN_MS` | `30,000` | Time limit for the ⚡ badge |
 | `WIN_QUOTES`, `LOSE_QUOTES`, `QUIPS` | | The machine's lines |
 
-The odds live in `settle()`, the reel strips in `STRIPS`. Colours, layout and sprites are in `hooks/machine.ts` and `hooks/pixels.ts`.
+The odds live in `settle()` and the reel strips in `STRIPS`, both in `hooks/game.ts`. Colours, layout and sprites are in `hooks/machine.ts` and `hooks/pixels.ts`.
 
 To pay out only fresh tokens rather than including cache reads, drop `g.cache` from the `total` in `settle()`.
 
