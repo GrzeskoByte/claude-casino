@@ -1,7 +1,11 @@
 {
   "name": "gamble-mode",
-  "author": { "name": "gsierock" },
+  "author": {
+    "name": "gsierock"
+  },
   "version": "0.1.0",
+  "license": "MIT",
   "description": "A pixel-art slot machine spins in a sidebar while Claude works, then pays out the turn's tokens as JACKPOT winnings.",
-  "types": "./types/index.d.ts"
+  "types": "./types/index.d.ts",
+  "repository": "https://github.com/GrzeskoByte/claude-casino"
 }

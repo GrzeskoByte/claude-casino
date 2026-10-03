@@ -193,3 +193,9 @@ The tests drive the engine with a mocked clock and store: a finished turn that p
 ## Gamble responsibly
 
 No real money, no real odds, no real house: the only thing you can lose here is time spent watching reels. The house always wins anyway.
+
+---
+
+## License
+
+[MIT](LICENSE) © 2026 Grzegorz Sierocki
